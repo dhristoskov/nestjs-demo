@@ -115,6 +115,8 @@ export class CarService {
             throw new Error('Car with that id does not exist');
         }
 
+        /*Check if the car is part of existing order
+        And only if not, allow deletion */
         let availableOrders: Order[] = []
         try{
             availableOrders = await this.Order.find({ car: carToDelete._id })

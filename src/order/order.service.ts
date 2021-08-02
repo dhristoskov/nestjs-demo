@@ -28,6 +28,7 @@ export class OrderService {
             throw new Error('Car not found!')
         }
 
+        /*Check if there is available car from that type*/
         if(carToRent.quantity <= 0){
             throw new Error('Car could not be rented!');
         }
@@ -39,6 +40,8 @@ export class OrderService {
             car: carToRent
         });
 
+        /*Create session to save new Order and remove 
+        one car from the available cars from the type*/
         const session = await this.connection.startSession();
         try {         
             session.startTransaction();
@@ -86,6 +89,8 @@ export class OrderService {
             throw new Error('Order with that id does not exist');
         }
 
+        /*Create session to add one car to
+        the car type when the order is deleted*/
         const session = await this.connection.startSession();
         try {
             session.startTransaction();
@@ -104,6 +109,8 @@ export class OrderService {
         return { msg: 'Order deleted!'}
     }
 
+    /*Calculate different offers for
+    long rent*/
     private calculateTotalPrice(days: number, rent: number): number {
         
         const total: number = days * rent;
