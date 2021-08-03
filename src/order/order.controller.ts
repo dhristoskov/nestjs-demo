@@ -7,7 +7,6 @@ import { OrderService } from './order.service';
 export class OrderController {
     constructor( private readonly orderService: OrderService ) {}
 
-
     @Post(':id')
     async addOrder(@Param('id') id: string, @Body() order: OrderType): Promise<OrderType> {
 

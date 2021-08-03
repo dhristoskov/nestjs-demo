@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Order, OrderType } from 'src/order/order.model';
+import { OrderType } from 'src/order/order.model';
 import { CarType } from './car.model';
 
 @Injectable()
@@ -117,9 +117,9 @@ export class CarService {
 
         /*Check if the car is part of existing order
         And only if not, allow deletion */
-        let availableOrders: Order[] = []
+        let availableOrders: OrderType[] = []
         try{
-            availableOrders = await this.Order.find({ car: carToDelete._id })
+            availableOrders = await this.Order.find({ car: carToDelete._id }).exec();
         }catch(err){
             throw new Error('Orders list could not be found');
         }

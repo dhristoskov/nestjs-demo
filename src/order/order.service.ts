@@ -19,7 +19,7 @@ export class OrderService {
 
         let carToRent: CarType;
         try {
-            carToRent = await this.CarUnit.findById(carId);
+            carToRent = await this.CarUnit.findById(carId).exec();
         }catch(err){
             throw new Error('There is a problem finding a car with that id')
         }
@@ -109,8 +109,7 @@ export class OrderService {
         return { msg: 'Order deleted!'}
     }
 
-    /*Calculate different offers for
-    long rent*/
+    /*Calculate different offers for long rent*/
     private calculateTotalPrice(days: number, rent: number): number {
         
         const total: number = days * rent;
