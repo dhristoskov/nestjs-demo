@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Order, OrderType } from 'src/order/order.model';
-import { Car, CarType } from './car.model';
+import { CarType } from './car.model';
 
 @Injectable()
 export class CarService {
@@ -12,7 +12,7 @@ export class CarService {
         @InjectModel('Cars') private readonly CarUnit: Model<CarType>
         ) {}
 
-    public async createNewCar( carToAdd: CarType ): Promise<Car> {
+    public async createNewCar( carToAdd: CarType ): Promise<CarType> {
         
         const { manufactorer, model, gears, seats, clima, price, quantity } = carToAdd;
 
@@ -35,9 +35,9 @@ export class CarService {
         }
     }
 
-    public async findCarById( id: string ): Promise<Car> {
+    public async findCarById( id: string ): Promise<CarType> {
 
-        let carById: Car;
+        let carById: CarType;
         try {
             carById = await this.CarUnit.findById(id).exec()
         }catch(err){
@@ -51,9 +51,9 @@ export class CarService {
         return carById;
     }
 
-    public async findAllListedCars(): Promise<Car[]> {
+    public async findAllListedCars(): Promise<CarType[]> {
 
-        let listedCars: Car[] = [];
+        let listedCars: CarType[] = [];
         try {
 
             listedCars = await this.CarUnit.find({ quantity: { $gt: 0 } }).exec()
@@ -68,11 +68,11 @@ export class CarService {
         return listedCars;
     }
 
-    public async updateCarById( id: string, updateData: CarType ): Promise<Car>{
+    public async updateCarById( id: string, updateData: CarType ): Promise<CarType>{
 
         const { manufactorer, model, gears, seats, clima, price, quantity } = updateData;
 
-        let carToUpdate: Car;
+        let carToUpdate: CarType;
         try {
             carToUpdate = await this.CarUnit.findById(id).exec()
         }catch(err){
@@ -104,7 +104,7 @@ export class CarService {
 
     public async deleteCarById( id: string ): Promise<{ msg: string }>{
         
-        let carToDelete: any;
+        let carToDelete: CarType;
         try {
             carToDelete = await this.CarUnit.findById(id).exec()
         }catch(err){

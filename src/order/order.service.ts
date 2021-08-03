@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel, InjectConnection } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 
-import { Car, CarType } from 'src/car/car.model';
-import { Order, OrderType } from './order.model';
+import { CarType } from 'src/car/car.model';
+import { OrderType } from './order.model';
 
 @Injectable()
 export class OrderService {
@@ -13,11 +13,11 @@ export class OrderService {
         @InjectConnection() private readonly connection: Connection
         ) {}
 
-    public async createNewOrder( carId: string, newOrder: OrderType ): Promise<Order> {
+    public async createNewOrder( carId: string, newOrder: OrderType ): Promise<OrderType> {
         
         const { daysRent, name } = newOrder;
 
-        let carToRent: Car;
+        let carToRent: CarType;
         try {
             carToRent = await this.CarUnit.findById(carId);
         }catch(err){
@@ -60,9 +60,9 @@ export class OrderService {
         return order;
     }
 
-    public async findOrderById( id: string ): Promise<Order> {
+    public async findOrderById( id: string ): Promise<OrderType> {
 
-        let orderById: Order;
+        let orderById: OrderType;
         try {
             orderById = await this.Order.findById(id).exec()
         }catch(err){
@@ -78,7 +78,7 @@ export class OrderService {
 
     public async deleteOrderById( id: string ): Promise<{ msg: string }>{
         
-        let orderToDelete: Order;
+        let orderToDelete: OrderType;
         try {
             orderToDelete = await this.Order.findById(id).exec()
         }catch(err){

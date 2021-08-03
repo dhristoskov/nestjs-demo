@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
-import { Order, OrderType } from './order.model';
+import { OrderType } from './order.model';
 import { OrderService } from './order.service';
 
 @Controller('orders')
@@ -9,14 +9,14 @@ export class OrderController {
 
 
     @Post(':id')
-    async addOrder(@Param('id') id: string, @Body() order: OrderType): Promise<Order> {
+    async addOrder(@Param('id') id: string, @Body() order: OrderType): Promise<OrderType> {
 
         const result = await this.orderService.createNewOrder(id, order);
         return result
     }
 
     @Get(':id')
-    async getSingleOrder(@Param('id') id: string ): Promise<Order> {
+    async getSingleOrder(@Param('id') id: string ): Promise<OrderType> {
 
         const result = await this.orderService.findOrderById(id);
         return result
