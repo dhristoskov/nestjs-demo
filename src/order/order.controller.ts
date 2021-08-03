@@ -10,21 +10,21 @@ export class OrderController {
     @Post(':id')
     async addOrder(@Param('id') id: string, @Body() order: OrderType): Promise<OrderType> {
 
-        const result = await this.orderService.createNewOrder(id, order);
+        const result: OrderType = await this.orderService.createNewOrder(id, order);
         return result
     }
 
     @Get(':id')
     async getSingleOrder(@Param('id') id: string ): Promise<OrderType> {
 
-        const result = await this.orderService.findOrderById(id);
+        const result: OrderType = await this.orderService.findOrderById(id);
         return result
     }
 
     @Delete(':id')
     async deleteCar(@Param('id') id: string ): Promise<{msg: string}> {
 
-        const result = await this.orderService.deleteOrderById(id);
+        const result: { msg: string } = await this.orderService.deleteOrderById(id);
         return result
     }
 }

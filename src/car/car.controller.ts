@@ -10,35 +10,35 @@ export class CarController {
     @Post()
     async addCar(@Body() carToAdd: CarType): Promise<CarType> {
 
-        const result = await this.carService.createNewCar(carToAdd);
+        const result: CarType = await this.carService.createNewCar(carToAdd);
         return result;
     }
 
     @Get(':id')
     async getSingleCar(@Param('id') id: string ): Promise<CarType> {
 
-        const result = await this.carService.findCarById(id);
+        const result: CarType = await this.carService.findCarById(id);
         return result
     }
 
     @Get()
     async findAll(): Promise<CarType[]> {
 
-        const result = await this.carService.findAllListedCars();
+        const result: CarType[] = await this.carService.findAllListedCars();
         return result
     }
 
     @Put(':id')
     async updateCar(@Param('id') id: string, @Body() updateData: CarType): Promise<CarType>{
 
-        const result = await this.carService.updateCarById(id, updateData);
+        const result: CarType = await this.carService.updateCarById(id, updateData);
         return result;
     }
 
     @Delete(':id')
     async deleteCar(@Param('id') id: string ): Promise<{msg: string}> {
 
-        const result = await this.carService.deleteCarById(id);
+        const result: { msg: string } = await this.carService.deleteCarById(id);
         return result
     }
 }
