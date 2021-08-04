@@ -14,11 +14,11 @@ export class CarService {
 
     public async createNewCar( carToAdd: CarType ): Promise<CarType> {
         
-        const { manufactorer, model, gears, seats, clima, price, quantity } = carToAdd;
+        const { manufacturer, model, gears, seats, clima, price, quantity } = carToAdd;
 
         try {
             const car: CarType = new this.CarUnit({
-                manufactorer, 
+                manufacturer, 
                 model, 
                 gears, 
                 seats, 
@@ -70,7 +70,7 @@ export class CarService {
 
     public async updateCarById( id: string, updateData: CarType ): Promise<CarType>{
 
-        const { manufactorer, model, gears, seats, clima, price, quantity } = updateData;
+        const { manufacturer, model, gears, seats, clima, price, quantity } = updateData;
 
         let carToUpdate: CarType;
         try {
@@ -86,7 +86,7 @@ export class CarService {
         try {
             const updatedCar = await this.CarUnit.findByIdAndUpdate(id, 
                 {
-                    manufactorer: manufactorer || carToUpdate.manufactorer,
+                    manufactorer: manufacturer || carToUpdate.manufacturer,
                     model: model || carToUpdate.model, 
                     gears: gears || carToUpdate.gears, 
                     seats: seats || carToUpdate.seats, 

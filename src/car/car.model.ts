@@ -4,7 +4,7 @@ import { Document } from "mongoose";
 @Schema()
 export class Car {
     @Prop({ type: String, required: true })
-    manufactorer: string;
+    manufacturer: string;
     @Prop({ type: String, required: true })
     model: string;
     @Prop({ type: String, required: true, enum: [ 'Automatic', 'Manual' ], default: 'Manual'})
