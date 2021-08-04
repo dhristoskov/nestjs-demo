@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 
 import { OrderSchema } from 'src/order/order.model';
 import { UserController } from './user.controller';
@@ -14,6 +16,11 @@ import { UserService } from './user.service';
         MongooseModule.forFeature([{
             name: 'Orders', schema: OrderSchema
         }]),
+        PassportModule,
+        JwtModule.register({
+            secret: process.env.JWT_SECRET,
+            signOptions: { expiresIn: 1 }
+        })
     ],
     controllers: [ UserController ],
     providers: [ UserService ] 

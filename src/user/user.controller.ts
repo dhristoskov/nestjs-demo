@@ -9,8 +9,8 @@ export class UserController {
 
     @Post('register')
     async register( @Res() res, @Body() user: UserType ){
-       console.log(user);
-       return res.status(HttpStatus.OK).json({ msg: "return" })
+       const result = await this.userService.registerUser(user);
+       return res.status(HttpStatus.OK).json({ user: result })
     }
 
     @Post('login')
