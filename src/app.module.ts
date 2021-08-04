@@ -11,13 +11,13 @@ import { UserModule } from './user/user.module';
     CarModule, 
     OrderModule,
     UserModule,
-    MongooseModule.forRoot('mongodb+srv://dimitar_hristoskov:QWiG2hMqyncSyK5S@cluster0.ghk0w.mongodb.net/NestJS?retryWrites=true&w=majority', {
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    MongooseModule.forRoot( process.env.MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
-    }),
-    ConfigModule.forRoot({
-      isGlobal: true
     })
   ],
 })
