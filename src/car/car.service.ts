@@ -124,7 +124,7 @@ export class CarService {
             throw new Error('Orders list could not be found');
         }
 
-        if(availableOrders){
+        if(availableOrders.length > 0){
             return { msg: 'This car could not be deleted!'}
         }
 

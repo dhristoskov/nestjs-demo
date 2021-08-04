@@ -13,10 +13,10 @@ export class UserService {
     ){}
 
     public async registerUser( user: UserType ) {
-        //
+        console.log(user)
     }
 
-    public async LoginIn( user: UserType ){
-        //
+    public async LoginInUser( user: UserType ){
+        console.log(user)
     }
 }

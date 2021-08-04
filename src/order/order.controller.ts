@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 
 import { OrderType } from './order.model';
 import { OrderService } from './order.service';
@@ -8,23 +8,23 @@ export class OrderController {
     constructor( private readonly orderService: OrderService ) {}
 
     @Post(':id')
-    async addOrder(@Param('id') id: string, @Body() order: OrderType): Promise<OrderType> {
+    async addOrder( @Res() res, @Param('id') id: string, @Body() order: OrderType): Promise<{ order: OrderType }>  {
 
         const result: OrderType = await this.orderService.createNewOrder(id, order);
-        return result
+        return res.status(HttpStatus.OK).json({ order: result });
     }
 
     @Get(':id')
-    async getSingleOrder(@Param('id') id: string ): Promise<OrderType> {
+    async getSingleOrder( @Res() res, @Param('id') id: string ): Promise<{ order: OrderType }> {
 
         const result: OrderType = await this.orderService.findOrderById(id);
-        return result
+        return res.status(HttpStatus.OK).json({ order: result });
     }
 
     @Delete(':id')
-    async deleteCar(@Param('id') id: string ): Promise<{msg: string}> {
+    async deleteCar( @Res() res, @Param('id') id: string ): Promise<{ msg: string }>  {
 
         const result: { msg: string } = await this.orderService.deleteOrderById(id);
-        return result
+        return res.status(HttpStatus.OK).json( result );
     }
 }

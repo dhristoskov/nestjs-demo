@@ -10,7 +10,9 @@ export class User {
     @Prop({ type: String, required: true, minlength: 8 })
     password: string;
     @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true }])
-    orders: Order[]
+    orders: Order[];
+    @Prop({ type: Date, required: true, default: Date.now })
+    dateCreate: Date;
 }
 
 export type UserType = User & mongoose.Document;
