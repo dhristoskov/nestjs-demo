@@ -3,19 +3,19 @@ import { Document } from "mongoose";
 
 @Schema()
 export class Car {
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     manufactorer: string;
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     model: string;
-    @Prop({ required: true, enum: [ 'Automatic', 'Manual' ], default: 'Manual'})
+    @Prop({ type: String, required: true, enum: [ 'Automatic', 'Manual' ], default: 'Manual'})
     gears: string;
-    @Prop({ required: true })
+    @Prop({ type: Number, required: true })
     seats: number;
-    @Prop({ required: true, enum: [ 'Yes', 'No' ], default: 'Yes' })
+    @Prop({ type: String, required: true, enum: [ 'Yes', 'No' ], default: 'Yes' })
     clima: string;
-    @Prop({ required: true })
+    @Prop({ type: Number, required: true })
     price: number;
-    @Prop({ required: true })
+    @Prop({ type: Number, required: true })
     quantity: number;
 }
 

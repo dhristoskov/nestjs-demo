@@ -46,8 +46,8 @@ export class OrderService {
         try {         
             session.startTransaction();
             await order.save({ session: session });         
-            const car = await this.CarUnit.findById(order.car).exec();
-            car.quantity = car.quantity - 1;
+            const car = await this.CarUnit
+                .findByIdAndUpdate({_id: order.car}, {$inc: {quantity: -1}}, {useFindAndModify: false}).exec();
             await car.save({ session: session });
             await session.commitTransaction();
         }catch(err){
@@ -95,8 +95,8 @@ export class OrderService {
         try {
             session.startTransaction();
             await this.Order.findByIdAndRemove(id, {useFindAndModify: false}).exec();
-            const car = await this.CarUnit.findById(orderToDelete.car).exec();
-            car.quantity = car.quantity + 1;
+            const car = await this.CarUnit
+                .findByIdAndUpdate({_id: orderToDelete.car}, {$inc: {quantity: 1}}, {useFindAndModify: false}).exec();
             await car.save({ session: session });
             await session.commitTransaction();           
         }catch(err){
